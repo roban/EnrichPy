@@ -1,4 +1,4 @@
-"""Encapsulates stellar chemical yield data, currently focusing on carbon 12.
+"""Encapsulates stellar chemical yield data, currently only carbon 12.
 
 General scheme:
 

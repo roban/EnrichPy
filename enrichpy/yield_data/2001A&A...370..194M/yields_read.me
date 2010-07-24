@@ -1,0 +1,30 @@
+
+Stellar yields from low- and intermediate-mass stars 
+(0.9 Msun <= Mi <= 5Msun) according to Marigo (2000, A&A in 
+press, astro-ph/0012181) calculations. Each file is named 
+according to the initial metallicity of the corresponding 
+set of stellar models, i.e. [Z=0.019, Y=0.273], 
+[Z=0.008, Y=0.25], [Z=0.004, Y=0,24]. Tables A1-A12.
+
+The meaning of the columns is as follows:
+ 
+ alpha_MLT  : mixing-lentgh parameter used in calculations 
+	for stellar models
+ Mi :  stellar initial mass (in Msun)
+ MTP,0:  stellar mass at the onset of the TP-AGB phase
+ Mej : ejected mass (in Msun) during the particular phase 
+	under consideration,
+       i.e. RGB for the files "low_rgbyieldsz*.dat";
+            AGB for the files "low_agbyieldsz*.dat"
+	    entire evolution for the files "totyieldsz*.dat", 
+	                               and "sp_yieldsz*.dat"
+ My(X): chemical yield (in Msun) of the element X produced 
+	during the particular phase under consideration 
+	(see above)
+
+The files "sp_yieldsz*.dat" contain the yields of the CNO 
+elements for stars with 3.5 Msun <= Mi <= 5Msun,
+distinguihing the 
+	total yields (rows labelled T); 
+	secondary components (rows labelled S); and
+	primary components (rows labelled P).

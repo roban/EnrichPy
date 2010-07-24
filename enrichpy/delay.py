@@ -8,10 +8,10 @@ import scipy.integrate
 import scipy.optimize
 import numpy
 
+import cosmolopy.utils as utils
 import yields
 import initialmassfunction
 import lifetime
-import utils
 
 class Delay:
     """Represents the delay distribution for metals emerging from stars.

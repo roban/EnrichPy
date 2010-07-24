@@ -1,0 +1,101 @@
+J/A+A/432/861    Yields of low and intermediate mass stars     (Gavilan+, 2005)
+================================================================================
+New low and intermediate mass stars yields: The evolution of carbon abundances.
+    Gavilan M., Buell J.F., Molla M.
+   <Astron. Astrophys. 432, 861 (2005)>
+   =2005A&A...432..861G
+================================================================================
+ADC_Keywords: Models, evolutionary ; Abundances
+Keywords: Galaxy: abundances - stars: evolution - galaxies: abundances -
+          Galaxy: evolution - galaxies: spiral
+
+Abstract:
+    We present a set of low and intermediate mass star yields based on a
+    modeling of the TP-AGB phase which affects the production of nitrogen
+    and carbon. These yields are evaluated by using them in a Galaxy
+    Chemical Evolution model, with which we analyze the evolution of
+    carbon abundances. By comparing the results with those obtained with
+    other yield sets, and with a large amount of observational data, we
+    conclude that the model using these yields combined with those from
+    Woosley & Weaver (1995ApJS..101..181W) for massive stars properly
+    reproduce all the data. The model reproduces well the increase of C/O
+    with increasing O/H abundances. Since these massive star yields do not
+    include winds, it implies that these stellar winds might have a
+    smoother dependence on metallicity than usually assumed and that a
+    significant quantity of carbon proceeds from LIM stars.
+
+Description:
+    These tables show the complete content of Table 1 and Table 2 which
+    give the production of elements in low and intermediate stars.
+    Table 1 give the stellar yields for 5 values of metallicities:
+    log(Z/Z_{sun}_)=-0.2, -0.1, 0.0, +0.1 and +0.2, and for masses
+    from 1 to 8M_{sun}_. Table 2 give the ejected mass by the stars
+    during their evolution for the same metallicity range. This last one
+    is the input file necessary to use in a chemical evolution model and
+    it includes the stars up to 100M_{sun}_. The ejected masses for
+    massive stars (m>8M_{sun}_) correspond to the production factors
+    given by Woosley & Weaver (1995ApJS..101..181W).
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName   Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe         80        .   This file
+table1.dat    111      168   Stellar yields for low and intermediate stars
+                             (M<8M_{sun}_)
+table2.dat    149      231  *Ejected mass by stars
+                             (0.8M_{sun}_<=M_{star}_<=100M{_sun}_)
+--------------------------------------------------------------------------------
+Note on table2.dat: Computed with table1 (M>=8M_{sun}_) and 
+     Woosley & Weaver (1995ApJS..101..181W) (M>=8M_{sun}_)
+--------------------------------------------------------------------------------
+
+See also:
+ J/A+A/299/755  : Stellar evolution. II. Post-AGB (Bloecker+, 1995)
+ J/A+A/337/403  : Low-mass stars evolutionary models (Baraffe+ 1998)
+ J/A+AS/141/371 : Low-mass stars evolution. tracks + isochrones (Girardi+, 2000)
+
+Byte-by-byte Description of file: table1.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units      Label     Explanations
+--------------------------------------------------------------------------------
+   1-  4  F4.1  Sun        [Fe/H]    Metallicity
+   8- 11  F4.2  solMass    Mstar     Stellar Mass
+  13- 21  E9.3  solMass    M[H]      Yield of H
+  23- 31  E9.3  solMass    M[He]     Yield of ^4^He
+  33- 41  E9.3  solMass    M[C12]    Yield of ^12^C
+  43- 51  E9.3  solMass    M[N14]    Yield of ^14^N
+  53- 61  E9.3  solMass    M[O16]    Yield of ^16^O
+  63- 71  E9.3  solMass    M[C13]    Yield of ^13^C
+  73- 81  E9.3  solMass    M[C12p]   Yield of primary ^12^C
+  83- 91  E9.3  solMass    M[N14p]   Yield of primary ^14^N
+  93-101  E9.3  solMass    M[O16p]   Yield of primary ^16^O
+ 103-111  E9.3  solMass    M[C13p]   Yield of primary ^13^C
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: table2.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units      Label     Explanations
+--------------------------------------------------------------------------------
+   1-  6  F6.4  ---        Z         Metallicity as Z (Z_{sun}_=0.020)
+   8- 13  F6.2  solMass    Mstar     Stellar Mass [0.8M_{sun}_-100.0M_{sun}_]
+  15- 22  E8.3  solMass    Mrmn      Mass of Remnant
+  24- 31  E8.3  solMass    H         Ejected Mass in H
+  33- 40  E8.3  solMass    4He       Ejected Mass in ^4^He
+  42- 49  E8.3  solMass    12C       Ejected Mass in ^12^C
+  51- 58  E8.3  solMass    13C       Ejected Mass in ^13^C
+  60- 67  E8.3  solMass    14N       Ejected Mass in ^14^N
+  69- 76  E8.3  solMass    13Cs      Ejected Mass in ^13^C (secondary component)
+  78- 85  E8.3  solMass    14Ns      Ejected Mass in ^14^N (secondary component)
+  87- 94  E8.3  solMass    16O       Ejected Mass in ^16^O
+  96-103  E8.3  solMass    20Ne      Ejected Mass in ^20^Ne
+ 105-113  E9.3  solMass    24Mg      Ejected Mass in ^24^Mg
+ 115-122  E8.3  solMass    28Si      Ejected Mass in ^28^Si
+ 124-131  E8.3  solMass    32S       Ejected Mass in ^32^S
+ 133-140  E8.3  solMass    40Ca      Ejected Mass in ^40^Ca
+ 142-149  E8.3  solMass    56Fe      Ejected Mass in ^56^Fe
+--------------------------------------------------------------------------------
+
+Acknowledgements: Mercedes Molla, mercedes.molla(at)ciemat.es
+================================================================================
+(End)                                        Patricia Vannier [CDS]  18-Jan-2005

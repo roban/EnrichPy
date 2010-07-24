@@ -1,0 +1,13 @@
+2010-07-24
+
+Beginning work on a standalone package for enrichment-related modules.
+
+Added yield_data directory needed by yields.py. yields.py runs to
+produce graphs now.
+
+delay.py runs and makes graphs.
+
+lifetime.py runs and makes graphs.
+
+initialmassfunction.py runs and makes graphs.
+

@@ -5,11 +5,10 @@ import scipy
 import scipy.constants.codata as scc
 
 import cosmolopy.reionization as cr
+import cosmolopy.utils as utils
+from utils import Saveable
 
 import luminosityfunction
-import ionization
-import utils
-from utils import Saveable
 import padconvolve
 
 def tophat_delay_kernel(t, tmin, tmax):
@@ -115,7 +114,7 @@ class LFIonHistory(Saveable):
         if self.clump_fact is not None:
             self.clump_fact_func = lambda z1: self.clump_fact
         if self.clump_fact_func is None:
-            self.clump_fact_func = ionization.clumping_factor_HB
+            self.clump_fact_func = cr.clumping_factor_HB
         return self.clump_fact_func
     
     def integrate_ion_recomb(self):
@@ -126,11 +125,11 @@ class LFIonHistory(Saveable):
         self.make_clump_fact_func()
         ion_func = self.make_ion_func()
         
-        x, w, t = ionization.integrate_ion_recomb(self.z,
-                                                  ion_func=ion_func,
-                                                  clump_fact_func =
-                                                  self.clump_fact_func,
-                                                  **self.cosmo)
+        x, w, t = cr.integrate_ion_recomb(self.z,
+                                          ion_func=ion_func,
+                                          clump_fact_func =
+                                          self.clump_fact_func,
+                                          **self.cosmo)
         self.xr = x
         self.w = w
         self.t = t

@@ -1,3 +1,6 @@
+"""Routines to pad convolution to control the centering of the kernel.
+
+"""
 import numpy
 def pad(x, klength, origin=0, value=0.):
     """Pad an array that is going to be convolved.

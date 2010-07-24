@@ -1,0 +1,129 @@
+J/A+AS/123/305      Yields of intermediate mass stars   (van den Hoek+ 1997)
+================================================================================
+New theoretical yields of intermediate mass stars
+      van den Hoek L.B., Groenewegen M.A.T.
+     <Astron. Astrophys. Suppl. Ser. 123, 305 (1997)>
+     =1997A&AS..123..305V      (SIMBAD/NED BibCode)
+================================================================================
+ADC_Keywords: Abundances ; Models, evolutionary
+Keywords: stars: abundances, evolution, AGB - ISM: abundances -
+          galaxies: abundances
+
+Description:
+    We present theoretical yields of H, ^4^He, ^12^C, ^13^C, ^14^N, and
+    ^16^O for stars with initial masses between 0.8 and 8M_{sun}_ and
+    initial metallicities Z=0.001, 0.004, 0.008, 0.02, and 0.04. We use
+    the evolutionary tracks of the Geneva group up to the early asymptotic
+    giant branch (AGB) in combination with a synthetic thermal-pulsing AGB
+    evolution model to follow in detail the chemical evolution and mass
+    loss up to the end of the AGB including the first, second, and third
+    dredge-up phases. Most of the relations used are metallicity dependent
+    to make a realistic comparison with stars of different initial
+    abundances. The effect of Hot Bottom Burning (HBB) is included in an
+    approximate way. The metallicity dependent yields of intermediate mass
+    stars listed in tables (1-38) below are well suited for use in
+    galactic chemical evolution models.
+
+File Summary:
+--------------------------------------------------------------------------------
+  FileName      Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe             80        .   This file
+tab2-21           108      289  *Yields for eta(AGB)=4, m(HBB)=0.8
+tab22-31           58       79  *Yields for eta(AGB)=4, m(HBB)=0.9
+table32            88       16   Total H, He yields for synthetic pre-AGB
+                                  evolution model
+tab33-38          106       82   Yields for HBB=0.8
+tables.tex        118     1525   LaTeX version of the tables
+--------------------------------------------------------------------------------
+Note to tab2-21, tab22-31: eta(AGB) is the mass loss scaling parameter
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: tab2-21
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1- 10  A10   ---     Yields    Yields
+  12- 16  F5.3  Sun     Zini      Initial Z abundance
+  18- 20  F3.1  solMass Mini      Initial mass
+  22- 30  E9.3  ---     H         H yield
+  32- 39  E8.3  ---     4He       ^4^He yield
+  41- 49  E9.3  ---     12C       ^12^C yield
+  51- 59  E9.3  ---     13C       ^13^C yield
+  61- 68  E8.3  ---     14N       ^14^N yield
+  70- 78  E9.3  ---     16O       ^16^O yield
+  80- 88  E9.3  ---     CNO       C+N+O yield
+  90- 98  E9.3  ---     Total     Yield of elements heavier than helium
+ 100-103  F4.2  solMass Meject    Ejected mass
+ 105-108  F4.2  solMass Mend      Mass of the end of phase (1)
+--------------------------------------------------------------------------------
+Note (1): Refers to pre-AGB, AGB and final AGB phases
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: tab22-31
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  9  A9    ---     Yields    Yields
+  11- 15  F5.3  Sun     Zini      Initial Z abundance
+  17- 19  F3.1  solMass Mini      Initial mass
+  21- 29  E9.3  -       12C       C^12^ yield
+  31- 39  E9.3  -       13C       C^13^ yield
+  41- 48  E8.3  -       14N       N^14^ yield
+  50- 58  E9.3  -       16O       O^16^ yield
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: table32
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  3  F3.1  solMass Mini      Initial mass
+   5- 12  E8.2  -       H1        H -yield at Z = 0.001
+  14- 21  E8.2  -       4He1      He-yield at Z = 0.001
+  22- 29  E8.2  -       H4        H -yield at Z = 0.004
+  31- 37  E7.2  -       4He4      He-yield at Z = 0.004
+  39- 46  E8.2  -       H8        H -yield at Z = 0.008
+  48- 54  E7.2  -       4He8      He-yield at Z = 0.008
+  56- 63  E8.2  -       H20       H -yield at Z = 0.020
+  65- 71  E7.2  -       4He20     He-yield at Z = 0.020
+  73- 80  E8.2  -       H40       H -yield at Z = 0.040
+  82- 88  E7.2  -       4He40     He-yield at Z = 0.040
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: tab33-38
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  5  A5    ---     Yields    Yields
+   7- 11  F5.3  Sun     Zini      Initial Z abundance
+      13  I1    ---     eta(AGB)  Mass loss scaling parameter
+  15- 17  F3.1  solMass Mini      Initial mass
+  19- 27  E9.3  ---     H         H yield
+  29- 37  E9.3  ---     4He       ^4^He yield
+  39- 47  E9.3  ---     12C       ^12^C yield
+  49- 57  E9.3  ---     13C       ^13^C yield
+  59- 66  E8.3  ---     14N       ^14^N yield
+  68- 76  E9.3  ---     16O       ^16^O yield
+  78- 86  E9.3  ---     CNO       C+N+O yield
+  88- 96  E9.3  ---     Total     Yield of element heavied than helium
+  98-101  F4.2  solMass Meject    Ejected mass
+ 103-106  F4.2  solMass Mend      Mass of the end of phase (1)
+--------------------------------------------------------------------------------
+Note (1): Refers to pre-AGB, AGB and final AGB phases
+--------------------------------------------------------------------------------
+
+Table1: Initial element abundances adopted
+--------------------------------------------------------------
+ Element.  Z=0.001   0.004     0.008     0.02      0.04
+--------------------------------------------------------------
+   H       0.756     0.744     0.728     0.68      0.62
+  4He      0.243     0.252     0.264     0.30      0.34
+  12C      2.24E-4   9.73E-4   1.79E-3   4.47E-3   9.73E-3
+  13C      0.04E-4   0.16E-4   0.29E-4   0.72E-4   1.56E-4
+  14N      0.70E-4   2.47E-4   5.59E-4   1.40E-3   2.47E-3
+  16O      5.31E-4   2.11E-3   4.24E-3   1.06E-2   2.11E-2
+--------------------------------------------------------------
+
+Acknowledgements: Bob van den Hoek <BOBBY@astro.uva.nl>
+================================================================================
+(End)                                         Patricia Bauer [CDS]   09-Oct-1996

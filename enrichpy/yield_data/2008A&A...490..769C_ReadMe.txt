@@ -1,0 +1,105 @@
+J/A+A/490/769     Yields from extremely metal-poor stars   (Campbell+, 2008)
+================================================================================
+Evolution and nucleosynthesis of extremely metal poor & metal-free low- and
+intermediate-mass stars.
+I: Stellar yield tables and the CEMPs.
+     Campbell S.W., Lattanzio J.C.
+    <Astron. Astrophys. 490, 769 (2008)>
+    =2008A&A...490..769C
+================================================================================
+ADC_Keywords: Models, evolutionary ; Stars, halo ; Abundances
+Keywords: stars: evolution - stars: interiors - Galaxy: halo -
+          stars: AGB and post-AGB
+
+Abstract:
+    The growing body of spectral observations of the extremely metal-poor
+    (EMP) stars in the Galactic Halo provides constraints on theoretical
+    studies of the chemical and stellar evolution of the early Universe.
+
+    To calculate yields for EMP stars for use in chemical evolution
+    calculations and to test whether such models can account for some of
+    the recent abundance observations of EMP stars, in particular the
+    highly C-rich EMP (CEMP) halo stars.
+
+    We modify an existing 1D stellar structure code to include
+    time-dependent mixing in a diffusion approximation. Using this code
+    and a post-processing nucleosynthesis code we calculate the structural
+    evolution and nucleosynthesis of a grid of models covering the
+    metallicity range: -6.5<=[Fe/H]<=-3.0 (plus Z=0), and mass range:
+    0.85<=M<=3.0M_{sun}_, amounting to 20 stars in total.
+
+Description:
+    Each of the first 5 tables contains stellar model chemical yields for
+    4 stars with initial masses: M=0.85, 1.0, 2.0, 3.0M_{sun}_ at a
+    particular metallicity. The metallicities are: Z=0 and [Fe/H]=-6.5,
+    -5.45, -4.0, -3.0. Note that the [Fe/H]=-4.0, 3M_{sun}_ yield is
+    missing due to a data loss (table4.dat). We also include a table
+    containing the remnant core masses for each star (table6.dat). The
+    yields are given in mass fraction integrated over the lifetime of the
+    star (see paper for details). The models were evolved from the zero
+    age main sequence up to the end of the asymptotic giant branch (AGB)
+    phase. Time dependent mixing was calculated using a diffusion
+    approximation. Opacities were updated to Iglesias & Rogers
+    (1996ApJ...464..943I) (for mid-range temperatures) and Ferguson et al.
+    (2005ApJ...623..585F) (for low temperatures). The Reimers
+    (1975MSRSL...8..369R) mass loss formula was used during the RGB phase
+    and the Vassiliadis & Wood (1993ApJ...413..641V) formula during the
+    AGB phase. No overshoot was applied.
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName   Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe         80        .   This file
+table1.dat     87       39  *Yields for Z=0.0
+table2.dat     87       39  *Yields for [Fe/H]=-6.5
+table3.dat     87       39  *Yields for [Fe/H]=-5.45
+table4.dat     71       39  *Yields for [Fe/H]=-4.0
+table5.dat     87       39  *Yields for [Fe/H]=-3.0
+table6.dat     33        5   Remnant core masses for all models
+--------------------------------------------------------------------------------
+Note on table1.dat, table2.dat, table3.dat, table4.dat, table5.dat:
+     M=(0.85, 1.0, 2.0, 3.0)M_{sun}_
+--------------------------------------------------------------------------------
+
+See also:
+         VI/109 : Pop. Synth. Models at very low metallicities (Schaerer, 2003)
+ J/A+A/285/473  : Low-mass stars (Forestini 1994)
+ J/A+A/327/1039 : Structure and evolution of low-mass stars (Chabrier+ 1997)
+ J/A+A/337/403  : Low-mass stars evolutionary models (Baraffe+ 1998)
+ J/A+AS/141/371 : Low-mass stars evolutionary tracks+isochrones (Girardi+, 2000)
+ J/ApJS/155/651 : Evolution of extremely metal-poor stars (Herwig+, 2004)
+ J/A+A/432/861  : Yields of low and intermediate mass stars (Gavilan+, 2005)
+ J/A+A/462/107  : Simulations of metal-poor star clusters (Fagiolini+, 2007)
+
+Byte-by-byte Description of file (#): table[12345].dat
+--------------------------------------------------------------------------------
+  Bytes Format Units Label  Explanations
+--------------------------------------------------------------------------------
+  1-  4  A4    ---   Elem   Chemical species names
+  7-  8  I2    ---   A      Nucleon number A
+ 10- 23  E14.7 ---   Init   Initial abundance for this chemical species
+ 26- 39  E14.7 ---   M0.85  Yield from 0.85M_{sun}_ model for this species (1)
+ 42- 55  E14.7 ---   M1.00  Yield from 1.00M_{sun}_ model for this species (1)
+ 58- 71  E14.7 ---   M2.00  Yield from 2.00M_{sun}_ model for this species (1)
+ 74- 87  E14.7 ---   M3.00  ? Yield from 3.00M_{sun}_ model for this species (1)
+                              Not calculated in table4
+--------------------------------------------------------------------------------
+Note (1): In fractional mass unit.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file (#): table6.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  5  F5.2  [Sun]   [Fe/H]    Metallicity (Units: [Fe/H] except for Z=0)
+   7- 12  F6.3  solMass Rem0.85   Remnant mass of 0.85M_{sun}_ model at this Z
+  14- 19  F6.3  solMass Rem1.00   Remnant mass of 1.00M_{sun}_ model at this Z
+  21- 26  F6.3  solMass Rem2.00   Remnant mass of 2.00M_{sun}_ model at this Z
+  28- 33  F6.3  solMass Rem3.00   ? Remnant mass of 3.00M_{sun}_ model at this Z
+--------------------------------------------------------------------------------
+
+Acknowledgements:
+    Simon Campbell, simcam(at)asiaa.sinica.edu.tw
+================================================================================
+(End)                                        Patricia Vannier [CDS]  16-Sep-2008

@@ -1,3 +1,5 @@
+"""Stellar lifetimes as a function of stellar mass, and related functions.
+"""
 import math
 
 import numpy
@@ -76,6 +78,12 @@ def invert_function_semilogy(function, xmin, xmax, xstep,
 
 def mass_from_main_sequence_life_function(function, mmin=0., mmax=1000., 
                                           mstep=0.01):
+    """Returns a function giving stellar mass from lifetime.
+
+    Uses invert_function_semilogy to define an interpolation function
+    that will return stellar mass when given stellar lifetime.
+    
+    """
     return invert_function_semilogy(function, mmax, mmin, -1. * mstep)
 
 def main_sequence_life_MM89(mass):

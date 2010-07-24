@@ -11,7 +11,8 @@ import math
 import numpy
 import scipy
 import scipy.integrate
-import utils
+
+import cosmolopy.utils as utils
 from utils import Normalize
 
 ##################### Utilities #####################################
