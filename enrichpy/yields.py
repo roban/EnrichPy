@@ -14,11 +14,14 @@ yield as a function of stellar mass and metallicity.
 import re
 import optparse
 import os
+from pkg_resources import resource_stream
 
 import scipy
 import scipy.interpolate as si
 import scipy.interpolate.fitpack2 as sif2
 import numpy
+
+import initialmassfunction
 
 def ejection_from_yield(mYield, mIni, mRem, xIni):
     """Convert net yield of an element to total ejected mass.
@@ -75,8 +78,14 @@ class Yield_Data:
         self.regrid_data()
 
     def read_table(self):
-        """Read data in self.filename."""
-        self.data = numpy.loadtxt(self.filename, **self.loadtxt_args)
+        """Read data in self.filename.
+
+        Uses the pkg_resources.resource_stream function to access the
+        data file.
+        """
+        stream = resource_stream(__name__, self.filename)
+        self.data = numpy.loadtxt(stream, **self.loadtxt_args)
+        stream.close()
 
     def select_data(self):
         if hasattr(self, 'mass_col'):
@@ -451,249 +460,6 @@ def extrapolate_function(yield_function, metallicity, return_coeffs=False):
     else:
         return exfuncHigh, exfuncLow
 
-class interpolate_function_1d:
-    """UNTESTED AND UNUSED
-    """
-
-    def __init__(self, Z, function2d):
-        """Z is the metalicity. function2d
-        """
-        self.Z = Z
-        self.function2d = function2d
-        # Find interpolated values for mass_C at the given Z:
-        mass_C_1d = self.function2d(logmVals, numpy.log10(Z))
-        self._mCfunc_log_1d = sif2.UnivariateSpline(logmVals, mass_C_1d, k=1)
-
-    def __call__(self, m):
-        # Run 1D interpolation.
-        m = numpy.atleast_1d(m)
-        mC = self._mCfunc_log_1d(numpy.log10(m))            
-        return mC
-
-def test_plot_GBM(weight_function=None):
-
-    data = Data_GBM(weight_function=weight_function)
-
-    mCfunc = Interpolate_Yields(*data(), weight_function=weight_function)
-
-    mass_star, metal_star, mass_C = data.orig_mass_star, data.orig_metal_star, data.orig_mass_C
-    
-    if weight_function is not None:
-        mass_C = weight_function(mass_star) * mass_C
-
-    import matplotlib.pyplot as pylab
-
-    pylab.figure()
-    pylab.scatter(mass_star, numpy.log10(metal_star), c=mass_C)
-
-    pylab.figure()
-    pylab.scatter(numpy.log10(mass_star), numpy.log10(metal_star), c=mass_C)
-    
-    m = numpy.arange(0., 110., 0.01)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']*2
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']*2
-
-    pylab.figure()
-    for Z in numpy.unique(metal_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = metal_star==Z
-        pylab.plot(mass_star[datamask], mass_C[datamask], 
-                   marker=mark, label=str(Z), c=col, ls='')
-        pylab.plot(m, mCfunc(m, Z), c=col, ls=':')
-
-        # Plot extrapolations:
-        print "metallicity Z = %.3g" % (Z)
-        exfuncHigh, exfuncLow = \
-                        extrapolate_function(mCfunc, Z)
-        lowmask = m < min(mass_star)
-        highmask = m > max(mass_star)
-
-        pylab.plot(m[lowmask], exfuncLow(m[lowmask]), c=col, ls='--')
-        pylab.plot(m[highmask], exfuncHigh(m[highmask]), c=col, ls='--')
-
-    pylab.legend(loc='best')
-
-    logZ = numpy.arange(-2, -1.4, 0.01)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']*9
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']*9
-    import matplotlib.pyplot as pylab
-    pylab.figure()
-    print len(numpy.unique(mass_star))
-    for M in numpy.unique(mass_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = mass_star==M
-        pylab.plot(numpy.log10(metal_star[datamask]), mass_C[datamask], 
-                   marker=mark, label=str(M), c=col, ls='')
-        pylab.plot(logZ, mCfunc(M, 10**logZ).flatten(), c=col, ls=':')
-        
-    #pylab.legend(loc='best')
-
-    Z = numpy.arange(0.01, 0.04, 1e-3)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']*9
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']*9
-    import matplotlib.pyplot as pylab
-    pylab.figure()
-    for M in numpy.unique(mass_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = mass_star==M
-        pylab.plot(metal_star[datamask], mass_C[datamask], 
-                   marker=mark, label=str(M), c=col, ls='')
-        pylab.plot(Z, mCfunc(M, Z).flatten(), c=col, ls=':')
-
-    pylab.xlim(Z[0], Z[-1])
-
-    
-
-def load_table_vdHG(f1 = 'yield_data/1997A&AS..123..305V/tab2-21.ssv'):
-    """Read in yield data from van den Hoek and Groenewegen (1997).
-    
-    The file is the semicolon-delimited (';') version of the data from:
-    
-        van den Hoek, L.~B., \& Groenewegen, M.~A.~T.\ 1997, \aaps,
-        123, 305 (1997A&AS..123..305V)
-
-    downloaded from: 
-
-        http://vizier.cfa.harvard.edu/viz-bin/VizieR?-source=J/A+AS/123/305
-
-    """
-    names1 = ('Yields',  
-              'Zini',    
-              'Mini',    
-              'H',       
-              '4He',     
-              '12C',     
-              '13C',     
-              '14N',     
-              '16O',     
-              'CNO',     
-              'Total',   
-              'Meject',  
-              'Mend')
-    types1 = ('S10', 
-              'f8',
-              'f4',
-              'f8',
-              'f8',
-              'f8',
-              'f8',
-              'f8',
-              'f8',
-              'f8',
-              'f8',
-              'f4',
-              'f4')
-    dat1 = numpy.loadtxt(f1, skiprows=35, delimiter=';', usecols=range(1,14),
-                         dtype={'names': names1, 'formats': types1})
-    return dat1
-
-def select_data_vdHG(data):
-    """Returns initial mass and metallicity and total carbon mass ejected.
-    """
-    mass_star = data[data['Yields']=='Total     ']['Mini']
-    metal_star = data[data['Yields']=='Total     ']['Zini']
-    mass_C = mass_star * data[data['Yields']=='Total     ']['12C']
-    
-    """The two Mini = 1.3MSun lines in the tables refer to the 1.25
-    MSun models both for tracks with (lower table lines) and without
-    (upper lines) overshooting.  Perhaps the tracks with overshooting
-    are preferred (see Schaller et al. 1992)."""
-
-    # Magic to deal with duplicate MSun=1.3 entries. We want to
-    # eliminate the first of each of the paired entries.
-    deli = numpy.where(mass_star==1.3)[0][0::2]
-    mask = numpy.ones(mass_star.shape, dtype=bool)
-    mask[deli] = False
-    return mass_star[mask], metal_star[mask], mass_C[mask]
-
-def interpolate_function_vdHG():
-    mass_star, metal_star, mass_C = select_data_vdHG(load_table_vdHG())
-    
-    ### bicubic spline interpolation on logZ###
-    m = mass_star
-    logZ = numpy.log10(metal_star)
-    mVals = numpy.unique(m)
-    mVals.sort()
-    logZVals = numpy.unique(logZ)
-    logZVals.sort
-    mCfunc_log = sif2.LSQBivariateSpline(m, logZ, mass_C,
-                                         mVals, logZVals, eps=eps)
-
-    
-    ### bicubic spline interpolation on linear Z ###
-    ZVals = numpy.unique(metal_star)
-    ZVals.sort()
-    mCfunc_lin = sif2.LSQBivariateSpline(mass_star, metal_star, mass_C,
-                                         mVals, ZVals, eps=eps)
-    def mCfunc(m, Z, metal_scale='log'):
-        """Set metal_scale to 'log' or 'lin'. Either way, Z is still
-        passed as the linear value."""
-        m = numpy.atleast_1d(m)
-        Z = numpy.atleast_1d(Z)
-        if metal_scale=='log':
-            mC = mCfunc_log(m, numpy.log10(Z))
-        elif metal_scale=='lin':
-            mC = mCfunc_lin(m, Z)
-        return mC
-            
-    return mCfunc
-
-def test_plot_vdHG():
-    mCfunc = interpolate_function_vdHG()
-    mass_star, metal_star, mass_C = select_data_vdHG(load_table_vdHG())
-    
-    m = numpy.arange(0., 10., 0.1)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']
-    import matplotlib.pyplot as pylab
-    pylab.figure()
-    for Z in numpy.unique(metal_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = metal_star==Z
-        pylab.plot(mass_star[datamask], mass_C[datamask], 
-                   marker=mark, label=str(Z), c=col, ls='')
-        pylab.plot(m, mCfunc(m, Z), c=col, ls=':')
-
-    pylab.legend(loc='best')
-
-    logZ = numpy.arange(-4, -1, 0.1)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']
-    import matplotlib.pyplot as pylab
-    pylab.figure()
-    print len(numpy.unique(mass_star))
-    for M in numpy.unique(mass_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = mass_star==M
-        pylab.plot(numpy.log10(metal_star[datamask]), mass_C[datamask], 
-                   marker=mark, label=str(M), c=col, ls='')
-        pylab.plot(logZ, mCfunc(M, 10**logZ).flatten(), c=col, ls=':')
-        #print mCfunc(M, 10**logZ)
-
-    pylab.legend(loc='best')
-
-    Z = numpy.arange(0., 0.05, 1e-3)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']
-    import matplotlib.pyplot as pylab
-    pylab.figure()
-    for M in numpy.unique(mass_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = mass_star==M
-        pylab.plot(metal_star[datamask], mass_C[datamask], 
-                   marker=mark, label=str(M), c=col, ls='')
-        pylab.plot(Z, mCfunc(M, Z).flatten(), c=col, ls=':')
-
-    pylab.xlim(Z[0], Z[-1])
-    pylab.legend(loc='best')
-
-
 class Data_ChLi(Yield_Data):
     """Chieffi & Limongi (2004) yields: 13--35 Msun; Z = 0, 1e-6 -- 0.02
     
@@ -934,10 +700,13 @@ class Data_CaLa(Yield_Data):
             cols = [1,2,3,4,5,6]
             if i==4:
                 cols = [1,2,3,4,5]
-            table = numpy.loadtxt(self.basefilename + str(i) + '.dat',
+            stream = resource_stream(__name__,
+                                     self.basefilename + str(i) + '.dat')
+            table = numpy.loadtxt(stream,
                                   #converters={0: self._CaLa_iso_converter},
                                   usecols=cols
                                   )
+            stream.close()
             if i==4:
                 table = numpy.hstack((table,
                                      numpy.nan * numpy.ones((len(table),1))))
@@ -946,7 +715,9 @@ class Data_CaLa(Yield_Data):
             #print table.shape
         #import newio
         #table = newio.loadtxt(self.basefilename + '6.dat')
-        table = numpy.loadtxt(self.basefilename + '6.dat')
+        stream = resource_stream(__name__, self.basefilename + '6.dat')
+        table = numpy.loadtxt(stream)
+        stream.close()
         self.tables.append(table)
         self.data = numpy.vstack(self.tables[0:5])
         self.remnant_data = self.tables[5]
@@ -1007,151 +778,10 @@ class Data_CaLa(Yield_Data):
         self.mass_C_total = mass_C_tot.flatten()[data_mask]
         self.mass_C = mass_C_net.flatten()[data_mask]
         
-        return self.mass_star, self.metal_star, self.mass_C    
+        return self.mass_star, self.metal_star, self.mass_C
 
-def get_joint_data():
-    mass_star_low, metal_star_low, mass_C_low = \
-        select_data_vdHG(load_table_vdHG())
-    mass_star_high, metal_star_high, mass_C_high = \
-        select_data_CL(load_table_CL())
-    mask = metal_star_high > 0
-    
-    mass_star = numpy.hstack((mass_star_low,
-                              mass_star_high[mask]))
-    metal_star = numpy.hstack((metal_star_low,
-                               metal_star_high[mask]))
-    mass_C = numpy.hstack((mass_C_low,
-                                mass_C_high[mask]))
 
-    joint_metal_star_range = [max(metal_star_low.min(), 
-                                  metal_star_high[mask].min()),
-                              min(metal_star_low.max(), 
-                                  metal_star_high[mask].max())]
-                              
-    return mass_star, metal_star, mass_C, joint_metal_star_range
-
-def interpolate_function_joint():
-    """By default the ejected carbon mass is interpolated on a
-    logarithmic metalicity scale.
-    """
-    mass_star, metal_star, mass_C, joint_metal_star_range = get_joint_data()
-    
-    ### bicubic spline interpolation on logZ ###
-    zvalmask = (metal_star >= joint_metal_star_range[0]) & (metal_star <= joint_metal_star_range[1])
-    m = mass_star
-    logZ = numpy.log10(metal_star)
-    mVals = numpy.unique(m)
-    mVals.sort()
-    logZVals = numpy.unique(logZ[zvalmask])
-    logZVals.sort
-    mCfunc_log = sif2.LSQBivariateSpline(m, logZ, mass_C,
-                                         mVals, logZVals, eps=eps)
-    
-    ### bicubic spline interpolation on linear Z ###
-    ZVals = numpy.unique(metal_star[zvalmask])
-    ZVals = ZVals[ZVals <= joint_metal_star_range[1]]
-    ZVals.sort()
-    mCfunc_lin = sif2.LSQBivariateSpline(mass_star, metal_star, mass_C,
-                                         mVals, ZVals, eps=eps)
-    def mCfunc(m, Z, metal_scale='log'):
-        """Set metal_scale to 'log' or 'lin'. Either way, Z is still
-        passed as the linear value."""
-        m = numpy.atleast_1d(m)
-        Z = numpy.atleast_1d(Z)
-        if metal_scale=='log':
-            mC = mCfunc_log(m, numpy.log10(Z))
-        elif metal_scale=='lin':
-            mC = mCfunc_lin(m, Z)
-        return mC
-            
-    return mCfunc
-
-def test_plot_joint():
-    mCfunc = interpolate_function_joint()
-
-    mass_star, metal_star, mass_C, joint_metal_star_range = get_joint_data()
-
-    import matplotlib.pyplot as pylab
-
-    pylab.figure()
-    pylab.scatter(mass_star, numpy.log10(metal_star), c=mass_C)
-    pylab.axhline(y=numpy.log10(joint_metal_star_range[0]))
-    pylab.axhline(y=numpy.log10(joint_metal_star_range[1]))
-    
-    m = numpy.arange(0., 40., 0.1)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']*2
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']*2
-
-    pylab.figure()
-    for Z in numpy.unique(metal_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = metal_star==Z
-        pylab.plot(mass_star[datamask], mass_C[datamask], 
-                   marker=mark, label=str(Z), c=col, ls='')
-        pylab.plot(m, mCfunc(m, Z), c=col, ls=':')
-
-    pylab.legend(loc='best')
-
-    logZ = numpy.arange(-8, -1, 0.1)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']*2
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']*2
-    import matplotlib.pyplot as pylab
-    pylab.figure()
-    print len(numpy.unique(mass_star))
-    for M in numpy.unique(mass_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = mass_star==M
-        pylab.plot(numpy.log10(metal_star[datamask]), mass_C[datamask], 
-                   marker=mark, label=str(M), c=col, ls='')
-        pylab.plot(logZ, mCfunc(M, 10**logZ).flatten(), c=col, ls=':')
-        
-        #print mCfunc(M, 10**logZ)
-
-    pylab.axvline(x=numpy.log10(joint_metal_star_range[0]))
-    pylab.axvline(x=numpy.log10(joint_metal_star_range[1]))
-    #pylab.legend(loc='best')
-
-    Z = numpy.arange(0., 0.05, 1e-3)
-    marks = ['.', 'o', 'v','+','x','*','.', 'o', 'v','+','x','*']*2
-    colors = ['r', 'y', 'g','c','b','k','r', 'y', 'g','c','b','k']*2
-    import matplotlib.pyplot as pylab
-    pylab.figure()
-    for M in numpy.unique(mass_star):
-        mark = marks.pop()
-        col = colors.pop()
-        datamask = mass_star==M
-        pylab.plot(metal_star[datamask], mass_C[datamask], 
-                   marker=mark, label=str(M), c=col, ls='')
-        pylab.plot(Z, mCfunc(M, Z).flatten(), c=col, ls=':')
-
-    pylab.axvline(x=joint_metal_star_range[0])
-    pylab.axvline(x=joint_metal_star_range[1])
-
-    pylab.xlim(Z[0], Z[-1])
-    #pylab.legend(loc='best')
-
-if __name__ == '__main__':
-
-    usage = """ """
-    
-    ### Argument parsing. ###
-    parser = optparse.OptionParser(usage)
-    parser.add_option("-f", "--file", action='store_true', dest="filename",
-                      default=None)
-    (options, args) = parser.parse_args()
-    if (len(args) > 0) and (options.filename is None):
-        options.filename = args[0]
-    if options.filename is None:
-        print "No filename given."
-        print usage
-    else:
-        prefix, extension = os.path.splitext(options.filename)
-
-    ### Main code ###
-    import pylab
-    import initialmassfunction
+def test_all():
     imf = initialmassfunction.imf_number_Chabrier
     args = {'weight_function' : imf}
     weighted_list = [Data_GBM(args),
@@ -1187,14 +817,27 @@ if __name__ == '__main__':
 #    test_plot_data_interp(Data_ChLi())
 #    test_plot_data_interp(Data_CaLa())
 
-    #import initialmassfunction
-    #test_plot_GBM(initialmassfunction.imf_num_Chabrier)
+if __name__ == '__main__':
 
-    #test_plot_GBM_metal(10**-1.65)
-    #test_plot_joint()
-    #test_plot_vdHG()
-    #mass_star, metal_star, mass_C = select_data_CL(load_table_CL())
-    #mCfunc = interpolate_function_CL()
+    usage = """ """
+    
+    ### Argument parsing. ###
+    parser = optparse.OptionParser(usage)
+    parser.add_option("-f", "--file", action='store_true', dest="filename",
+                      default=None)
+    (options, args) = parser.parse_args()
+    if (len(args) > 0) and (options.filename is None):
+        options.filename = args[0]
+    if options.filename is None:
+        print "No filename given."
+        print usage
+    else:
+        prefix, extension = os.path.splitext(options.filename)
+
+    ### Main code ###
+
+    import pylab
+    test_all()
 
     ### Plot output code. ###
     if options.filename is None:

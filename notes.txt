@@ -11,3 +11,8 @@ lifetime.py runs and makes graphs.
 
 initialmassfunction.py runs and makes graphs.
 
+2010-07-26
+
+Converted yields to using pkg_resources so that it can access
+installed data files in a system- and installation-independent way.
+

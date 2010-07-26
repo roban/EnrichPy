@@ -6,9 +6,9 @@ import scipy.constants.codata as scc
 
 import cosmolopy.reionization as cr
 import cosmolopy.utils as utils
-from utils import Saveable
+from cosmolopy.utils import Saveable
 
-import luminosityfunction
+from cosmolopy import luminosityfunction
 import padconvolve
 
 def tophat_delay_kernel(t, tmin, tmax):
@@ -37,7 +37,7 @@ def get_omega_CIV_data(filename):
     return data
 
 class LFIonHistory(Saveable):
-    """Calculate and store ionization history.
+    """Calculate an ionization history based on luminosity function evolution.
     
     LF parameters enter here, e.g. choice of LF, f_esc_gamma, M*-z slope, alpha
 
