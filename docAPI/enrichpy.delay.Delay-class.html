@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>enrichpy.delay.Delay</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="enrichpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="enrichpy-module.html">Package&nbsp;enrichpy</a> ::
+        <a href="enrichpy.delay-module.html">Module&nbsp;delay</a> ::
+        Class&nbsp;Delay
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Delay</h1><p class="nomargin-top"><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay">source&nbsp;code</a></span></p>
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="enrichpy.delay.MockDelay-class.html">MockDelay</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<p>Represents the delay distribution for metals emerging from stars.</p>
+<p>Takes the IMF, stellar metal yield function, and stellar lifetime
+function and calculates various the distribution of ejected metal
+mass with respect to stellar mass and stellar lifetime.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">metallicity</span>,
+        <span class="summary-sig-arg">imfFunc</span>=<span class="summary-sig-default">by_number(imf_mass_Chabrier)</span>,
+        <span class="summary-sig-arg">yieldClass</span>=<span class="summary-sig-default">&lt;class enrichpy.yields.Data_GBM at 0x9844cec&gt;</span>,
+        <span class="summary-sig-arg">ejections</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">lifetimeFunc</span>=<span class="summary-sig-default">&lt;function main_sequence_life_K97 at 0x9851f7c&gt;</span>,
+        <span class="summary-sig-arg">lowMass</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">highMass</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">minTime</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">maxTime</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Initialize the distribution.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#mass_limit_error" class="summary-sig-name">mass_limit_error</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m_max</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">imf_index</span>=<span class="summary-sig-default">-2.3</span>)</span><br />
+      Estimate the error incurred by excluding stars above m_max.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.mass_limit_error">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="metal_mass_dist_postinterp"></a><span class="summary-sig-name">metal_mass_dist_postinterp</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m</span>)</span><br />
+      Like metal_mass_dist, but with interpolation after IMF
+multiplication.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_mass_dist_postinterp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#metal_mass_dist" class="summary-sig-name">metal_mass_dist</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m</span>)</span><br />
+      Fraction of total carbon yield from stars of mass m,
+dfC/dm, i.e.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_mass_dist">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#yield_mass" class="summary-sig-name">yield_mass</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m</span>)</span><br />
+      Carbon yield from a star of mass m.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.yield_mass">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#metal_mass_CCDF" class="summary-sig-name">metal_mass_CCDF</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m</span>,
+        <span class="summary-sig-arg">highMass</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">method</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">romberg</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Complementary cumulative distribution of metal yield by mass,
+i.e.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_mass_CCDF">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#metal_mass_dist_binned" class="summary-sig-name">metal_mass_dist_binned</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m</span>,
+        <span class="summary-sig-arg">ccdf</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Calculate the values of a binned enrichment function.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_mass_dist_binned">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#metal_time_CDF" class="summary-sig-name">metal_time_CDF</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">t</span>,
+        <span class="summary-sig-arg">ccdf</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">return_mass</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      The delay CDF of metal yield as a function of stellar age.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_time_CDF">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#metal_time_dist_binned" class="summary-sig-name">metal_time_dist_binned</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">t</span>,
+        <span class="summary-sig-arg">ccdf</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Calculate the values of a binned delay function.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_time_dist_binned">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#metal_time_dist_unbinned" class="summary-sig-name">metal_time_dist_unbinned</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">t</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Delay function inferred from metal_time_dist_binned.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_time_dist_unbinned">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.delay.Delay-class.html#imf" class="summary-sig-name">imf</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">mass</span>)</span><br />
+      The initial mass function.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.imf">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="m_star"></a><span class="summary-sig-name">m_star</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">t_life</span>)</span><br />
+      Stellar mass as a function of lifetime.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.m_star">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="t_life"></a><span class="summary-sig-name">t_life</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">m_star</span>)</span><br />
+      Stellar lifetime as a function of mass.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.t_life">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="stats"></a><span class="summary-sig-name">stats</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">meantol</span>=<span class="summary-sig-default">0.001</span>)</span><br />
+      Calculate median and mean delay.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.stats">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="printstats"></a><span class="summary-sig-name">printstats</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.printstats">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">metallicity</span>,
+        <span class="sig-arg">imfFunc</span>=<span class="sig-default">by_number(imf_mass_Chabrier)</span>,
+        <span class="sig-arg">yieldClass</span>=<span class="sig-default">&lt;class enrichpy.yields.Data_GBM at 0x9844cec&gt;</span>,
+        <span class="sig-arg">ejections</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">lifetimeFunc</span>=<span class="sig-default">&lt;function main_sequence_life_K97 at 0x9851f7c&gt;</span>,
+        <span class="sig-arg">lowMass</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">highMass</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">minTime</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">maxTime</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initialize the distribution.</p>
+<div class="rst-section" id="rst-parameters">
+<h1 class="heading">Parameters</h1>
+<dl class="rst-docutils">
+<dt>metallicity: scalar</dt>
+<dd>metallicity value for the yield calculation.</dd>
+<dt>imfFunc: function</dt>
+<dd>should return IMF by number given stellar mass in Msun.</dd>
+<dt>yieldClass:</dt>
+<dd>class encapsulating the yield data (see yields.py)</dd>
+<dt>lifetimeFunc: function</dt>
+<dd>should return lifetime of a star given mass in Msun.</dd>
+<dt>lowMass, highMass: float</dt>
+<dd>define the interval over which to normalize the distributions.
+Default to the range of masses in yieldClass().mVals</dd>
+</dl>
+</div>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="mass_limit_error"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">mass_limit_error</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">m_max</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">imf_index</span>=<span class="sig-default">-2.3</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.mass_limit_error">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Estimate the error incurred by excluding stars above m_max.</p>
+<p>m_max defaults to self.highMass.</p>
+<p>imf_index is the powerlaw index of the imf at high masses.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="metal_mass_dist"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">metal_mass_dist</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">m</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_mass_dist">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Fraction of total carbon yield from stars of mass m,
+dfC/dm, i.e. the distribution of carbon production as a
+function of stellar mass.</p>
+<p>This is weighted by the stellar initial mass function (IMF),
+so that metal_mass_dist(m) * dm is the fraction of carbon
+emitted by stars with masses between m and m+dm.</p>
+<p>Note that this is normalized over the interval from
+self.lowMass to self.highMass.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="yield_mass"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">yield_mass</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">m</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.yield_mass">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Carbon yield from a star of mass m.</p>
+<p>This is the total mass of carbon emitted by a single star of
+mass m over its lifetime.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="metal_mass_CCDF"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">metal_mass_CCDF</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">m</span>,
+        <span class="sig-arg">highMass</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">method</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">romberg</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_mass_CCDF">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Complementary cumulative distribution of metal yield by mass,
+i.e. the fraction of the total metal output produced by stars
+above mass m.</p>
+<p>This is the integral of metal_mass_dist from m to highMass (or
+self.highMass).</p>
+<p>Note that this is normalized over the interval from
+self.lowMass to self.highMass, so values may be negative above
+highMass and greater than one below lowMass.</p>
+<p>kwargs get passed to utils.ccumulate, which may passes them to
+utils.integrate_piecewise, which may pass them to the
+integration routine.</p>
+<p>See also: metal_mass_dist.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="metal_mass_dist_binned"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">metal_mass_dist_binned</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">m</span>,
+        <span class="sig-arg">ccdf</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_mass_dist_binned">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate the values of a binned enrichment function.</p>
+<p>Each returned value bdf[i] is the integral of the mass dist
+function from m[i-1] to m[i]. bdf[0] is the integral from
+self.lowMass to m[0].</p>
+<p>Also returned are delta_m values (the width of each bin in
+units of mass), so the average derivative can be calculated,
+if desired.</p>
+<p>Note that this is normalized over the interval from
+self.lowMass to self.highMass.</p>
+<p>See also: metal_mass_CCDF</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="metal_time_CDF"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">metal_time_CDF</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">t</span>,
+        <span class="sig-arg">ccdf</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">return_mass</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_time_CDF">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>The delay CDF of metal yield as a function of stellar age.</p>
+<p>I.e. the fraction of the total metal yield produced by stars
+with a lifetime of t or less.</p>
+<p>Note that this is normalized over the interval from
+self.lowMass to self.highMass, so values may be negative above
+the lifetime corresponding to highMass and greater than one
+below the lowMass lifetime.</p>
+<p>Calculated using metal_mass_CCDF and m_star.</p>
+<p>kwargs get passed to metal_mass_CCDF.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="metal_time_dist_binned"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">metal_time_dist_binned</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">t</span>,
+        <span class="sig-arg">ccdf</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_time_dist_binned">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculate the values of a binned delay function.</p>
+<p>Each returned value bdf[i] is the integral of the delay
+function from t[i-1] to t[i]. bdf[0] is the integral from
+self.minTime to t[0].</p>
+<p>Also returned are delta_t values (the width of each bin in
+units of time), so the average derivative can be calculated,
+if desired.</p>
+<p>Note that this is normalized over the interval from
+self.lowMass to self.highMass.</p>
+<p>See also: metal_time_CDF</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="metal_time_dist_unbinned"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">metal_time_dist_unbinned</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">t</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.metal_time_dist_unbinned">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Delay function inferred from metal_time_dist_binned.</p>
+<p>Simply returns the bin values divided by the bin size. Note
+that the first bin is from self.minTime to t[0].</p>
+<div class="rst-section" id="rst-notes">
+<h1 class="heading">Notes</h1>
+<p>This is the most accurate way to get the distribution of metal
+emission delay times. A more analytical treatment would be to
+convert directly from the continuous metal-mass distribution,
+but this involves the derivative of the stellar lifetime as a
+funtion of mass, which can be numerically problematic.</p>
+<p>Note that this is normalized over the interval from
+self.lowMass to self.highMass.</p>
+</div>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="imf"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">imf</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">mass</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.delay-pysrc.html#Delay.imf">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>The initial mass function.</p>
+<p>Note that the normalization may include stars that do not
+contribute to the yield of metals.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="enrichpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jul 27 15:00:49 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

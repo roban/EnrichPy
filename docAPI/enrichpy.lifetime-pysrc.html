@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>enrichpy.lifetime</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="enrichpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="enrichpy-module.html">Package&nbsp;enrichpy</a> ::
+        Module&nbsp;lifetime
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="enrichpy.lifetime-module.html">Module enrichpy.lifetime</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""Stellar lifetimes as a function of stellar mass, and related functions.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">math</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">interpolate</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="main_sequence_life"></a><div id="main_sequence_life-def"><a name="L8"></a><tt class="py-lineno">  8</tt> <a class="py-toggle" href="#" id="main_sequence_life-toggle" onclick="return toggle('main_sequence_life');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#main_sequence_life">main_sequence_life</a><tt class="py-op">(</tt><tt class="py-param">mass</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main_sequence_life-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main_sequence_life-expanded"><a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-docstring">"""Rough approxiamtion of main sequence lifetime in years.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">    tauMS ~ 10^10 years * (M/Msun)^-2.5</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    mass in solar masses.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-number">1.e10</tt> <tt class="py-op">*</tt> <tt class="py-name">mass</tt><tt class="py-op">**</tt><tt class="py-op">-</tt><tt class="py-number">2.5</tt> </tt>
+</div><a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="mass_from_main_sequence_life"></a><div id="mass_from_main_sequence_life-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="mass_from_main_sequence_life-toggle" onclick="return toggle('mass_from_main_sequence_life');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#mass_from_main_sequence_life">mass_from_main_sequence_life</a><tt class="py-op">(</tt><tt class="py-param">life</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="mass_from_main_sequence_life-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="mass_from_main_sequence_life-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-docstring">"""Approximate mass given main sequence lifetime in years.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    tauMS ~ 10^10 years * (M/Msun)^-2.5</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">    mass in solar masses.</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">life</tt><tt class="py-op">/</tt><tt class="py-number">1.e10</tt><tt class="py-op">)</tt><tt class="py-op">**</tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-number">1.</tt><tt class="py-op">/</tt><tt class="py-op">(</tt><tt class="py-number">2.5</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="invert_function"></a><div id="invert_function-def"><a name="L26"></a><tt class="py-lineno"> 26</tt> <a class="py-toggle" href="#" id="invert_function-toggle" onclick="return toggle('invert_function');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#invert_function">invert_function</a><tt class="py-op">(</tt><tt class="py-param">function</tt><tt class="py-op">,</tt> <tt class="py-param">xmin</tt><tt class="py-op">,</tt> <tt class="py-param">xmax</tt><tt class="py-op">,</tt> <tt class="py-param">xstep</tt><tt class="py-op">,</tt> <tt class="py-param">bounds_error</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="invert_function-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="invert_function-expanded"><a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-docstring">"""Invert function y = F(x) using interpolation.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">    Returns an interpolation function giving x as a function of y.</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-name">xi</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">arange</tt><tt class="py-op">(</tt><tt class="py-name">xmin</tt><tt class="py-op">,</tt> <tt class="py-name">xmax</tt> <tt class="py-op">+</tt> <tt class="py-name">xstep</tt><tt class="py-op">,</tt> <tt class="py-name">xstep</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">yi</tt> <tt class="py-op">=</tt> <tt class="py-name">function</tt><tt class="py-op">(</tt><tt class="py-name">xi</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-name">ifunc</tt> <tt class="py-op">=</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">interpolate</tt><tt class="py-op">.</tt><tt class="py-name">interp1d</tt><tt class="py-op">(</tt><tt class="py-name">yi</tt><tt class="py-op">,</tt> <tt class="py-name">xi</tt><tt class="py-op">,</tt> <tt class="py-name">bounds_error</tt><tt class="py-op">=</tt><tt class="py-name">bounds_error</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">ifunc</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="invert_function_log"></a><div id="invert_function_log-def"><a name="L36"></a><tt class="py-lineno"> 36</tt> <a class="py-toggle" href="#" id="invert_function_log-toggle" onclick="return toggle('invert_function_log');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#invert_function_log">invert_function_log</a><tt class="py-op">(</tt><tt class="py-param">function</tt><tt class="py-op">,</tt> <tt class="py-param">logxmin</tt><tt class="py-op">,</tt> <tt class="py-param">logxmax</tt><tt class="py-op">,</tt> <tt class="py-param">logxstep</tt><tt class="py-op">,</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">                        <tt class="py-param">bounds_error</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="invert_function_log-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="invert_function_log-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-docstring">"""Invert function y = F(x) using interpolation.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">    Internally uses logarithmic scale in the x values and in</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">    performing the interpolation.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">    Returns</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">    -------</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">    an interpolation function giving x as a function of y. NOTE:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">    provide y, don't provide log(y).</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">logxi</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">arange</tt><tt class="py-op">(</tt><tt class="py-name">logxmin</tt><tt class="py-op">,</tt> <tt class="py-name">logxmax</tt> <tt class="py-op">+</tt> <tt class="py-name">logxstep</tt><tt class="py-op">,</tt>  </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                         <tt class="py-name">logxstep</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-name">logyi</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">log10</tt><tt class="py-op">(</tt><tt class="py-name">function</tt><tt class="py-op">(</tt><tt class="py-number">10.</tt><tt class="py-op">**</tt><tt class="py-name">logxi</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-name">logifunc</tt> <tt class="py-op">=</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">interpolate</tt><tt class="py-op">.</tt><tt class="py-name">interp1d</tt><tt class="py-op">(</tt><tt class="py-name">logyi</tt><tt class="py-op">,</tt> <tt class="py-name">logxi</tt><tt class="py-op">,</tt>  </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                                          <tt class="py-name">bounds_error</tt><tt class="py-op">=</tt><tt class="py-name">bounds_error</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-name">ifunc</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">y</tt><tt class="py-op">:</tt> <tt class="py-number">10.</tt><tt class="py-op">**</tt><tt class="py-name">logifunc</tt><tt class="py-op">(</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">log10</tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">ifunc</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="invert_function_semilogy"></a><div id="invert_function_semilogy-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="invert_function_semilogy-toggle" onclick="return toggle('invert_function_semilogy');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#invert_function_semilogy">invert_function_semilogy</a><tt class="py-op">(</tt><tt class="py-param">function</tt><tt class="py-op">,</tt> <tt class="py-param">xmin</tt><tt class="py-op">,</tt> <tt class="py-param">xmax</tt><tt class="py-op">,</tt> <tt class="py-param">xstep</tt><tt class="py-op">,</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                             <tt class="py-param">bounds_error</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="invert_function_semilogy-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="invert_function_semilogy-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-docstring">"""Invert function y = F(x) using interpolation.</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    Internally uses logarithmic scale in the y values.</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">    Returns</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">    -------</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">    an interpolation function giving x as a function of y. NOTE:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">    provide y, don't provide log(y).</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-name">xi</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">arange</tt><tt class="py-op">(</tt><tt class="py-name">xmin</tt><tt class="py-op">,</tt> <tt class="py-name">xmax</tt> <tt class="py-op">+</tt> <tt class="py-name">xstep</tt><tt class="py-op">,</tt>  </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                      <tt class="py-name">xstep</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">logyi</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">log10</tt><tt class="py-op">(</tt><tt class="py-name">function</tt><tt class="py-op">(</tt><tt class="py-name">xi</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-name">ifunclog</tt> <tt class="py-op">=</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">interpolate</tt><tt class="py-op">.</tt><tt class="py-name">interp1d</tt><tt class="py-op">(</tt><tt class="py-name">logyi</tt><tt class="py-op">,</tt> <tt class="py-name">xi</tt><tt class="py-op">,</tt>  </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                                       <tt class="py-name">bounds_error</tt><tt class="py-op">=</tt><tt class="py-name">bounds_error</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-name">ifunc</tt> <tt class="py-op">=</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">y</tt><tt class="py-op">:</tt> <tt class="py-name">ifunclog</tt><tt class="py-op">(</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">log10</tt><tt class="py-op">(</tt><tt class="py-name">y</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">ifunc</tt> </tt>
+</div><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="mass_from_main_sequence_life_function"></a><div id="mass_from_main_sequence_life_function-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="mass_from_main_sequence_life_function-toggle" onclick="return toggle('mass_from_main_sequence_life_function');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#mass_from_main_sequence_life_function">mass_from_main_sequence_life_function</a><tt class="py-op">(</tt><tt class="py-param">function</tt><tt class="py-op">,</tt> <tt class="py-param">mmin</tt><tt class="py-op">=</tt><tt class="py-number">0.</tt><tt class="py-op">,</tt> <tt class="py-param">mmax</tt><tt class="py-op">=</tt><tt class="py-number">1000.</tt><tt class="py-op">,</tt>  </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                                          <tt class="py-param">mstep</tt><tt class="py-op">=</tt><tt class="py-number">0.01</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="mass_from_main_sequence_life_function-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="mass_from_main_sequence_life_function-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-docstring">"""Returns a function giving stellar mass from lifetime.</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">    Uses invert_function_semilogy to define an interpolation function</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    that will return stellar mass when given stellar lifetime.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-0" class="py-name" targets="Function enrichpy.lifetime.invert_function_semilogy()=enrichpy.lifetime-module.html#invert_function_semilogy"><a title="enrichpy.lifetime.invert_function_semilogy" class="py-name" href="#" onclick="return doclink('link-0', 'invert_function_semilogy', 'link-0');">invert_function_semilogy</a></tt><tt class="py-op">(</tt><tt class="py-name">function</tt><tt class="py-op">,</tt> <tt class="py-name">mmax</tt><tt class="py-op">,</tt> <tt class="py-name">mmin</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1.</tt> <tt class="py-op">*</tt> <tt class="py-name">mstep</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="main_sequence_life_MM89"></a><div id="main_sequence_life_MM89-def"><a name="L89"></a><tt class="py-lineno"> 89</tt> <a class="py-toggle" href="#" id="main_sequence_life_MM89-toggle" onclick="return toggle('main_sequence_life_MM89');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#main_sequence_life_MM89">main_sequence_life_MM89</a><tt class="py-op">(</tt><tt class="py-param">mass</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main_sequence_life_MM89-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main_sequence_life_MM89-expanded"><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt class="py-docstring">"""Lifetime in years from Maeder &amp; Meynet (1989) via Romano et al. (2005). </tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">    The minlife attribute gives the minimum lifetime for a star as M-&gt;inf.</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">    Parameters</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">    ----------</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">    mass (1D array):</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        Stellar mass in solar masses.</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">    Notes</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">    -----</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">    From Maeder &amp; Meynet (1989), via Romano, Chiappini, Matteucci,</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">    Tosi, 2005, A\&amp;A, 430, 491 (2005A&amp;A...430..491R), who say:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">    ::</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">      t = </tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        10^(-0.6545 logm + 1) for m &lt;= 1.3 MSun</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        10^(-3.7 logm + 1.35) for 1.3 &lt; m/MSun &lt;= 3</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        10^(-2.51 logm + 0.77) for 3 &lt; m/MSun &lt;= 7</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        10^(-1.78 logm + 0.17) for 7 &lt; m/MSun &lt;= 15</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        10^(-0.86 logm - 0.94) for 15 &lt; m/MSun &lt;= 60</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        1.2 m^-1.85  +  0.003 for m &gt; 60 MSun</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">      with t in units of Gyr.</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-name">mass</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">atleast_1d</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">mass</tt><tt class="py-op">.</tt><tt class="py-name">ndim</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">         <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"mass must be a 1D array or scalar."</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-name">logm</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">log10</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-name">logmfactor</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">0.6545</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">3.7</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">2.51</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1.78</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">0.86</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">transpose</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-name">constant</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-number">1.</tt><tt class="py-op">,</tt> <tt class="py-number">1.35</tt><tt class="py-op">,</tt> <tt class="py-number">0.77</tt><tt class="py-op">,</tt> <tt class="py-number">0.17</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">0.94</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">transpose</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-name">mlimit</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-number">0.</tt><tt class="py-op">,</tt> <tt class="py-number">1.3</tt><tt class="py-op">,</tt> <tt class="py-number">3.</tt><tt class="py-op">,</tt> <tt class="py-number">7.</tt><tt class="py-op">,</tt> <tt class="py-number">15.</tt><tt class="py-op">,</tt> <tt class="py-number">60.</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">transpose</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-name">t_star</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">**</tt><tt class="py-op">(</tt><tt class="py-name">logmfactor</tt> <tt class="py-op">*</tt> <tt class="py-name">logm</tt> <tt class="py-op">+</tt> <tt class="py-name">constant</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt>  </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">                       <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">mlimit</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">:</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">mass</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">mlimit</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">                       <tt class="py-name">axis</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-name">t_star</tt><tt class="py-op">[</tt><tt class="py-name">mass</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">60.</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">1.2</tt> <tt class="py-op">*</tt> <tt class="py-name">mass</tt><tt class="py-op">[</tt><tt class="py-name">mass</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">60.</tt><tt class="py-op">]</tt><tt class="py-op">**</tt><tt class="py-op">-</tt><tt class="py-number">1.85</tt> <tt class="py-op">+</tt> <tt class="py-number">0.003</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-number">1.e9</tt> <tt class="py-op">*</tt> <tt class="py-name">t_star</tt> </tt>
+</div><a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Function enrichpy.lifetime.main_sequence_life_MM89()=enrichpy.lifetime-module.html#main_sequence_life_MM89"><a title="enrichpy.lifetime.main_sequence_life_MM89" class="py-name" href="#" onclick="return doclink('link-1', 'main_sequence_life_MM89', 'link-1');">main_sequence_life_MM89</a></tt><tt class="py-op">.</tt><tt class="py-name">minlife</tt> <tt class="py-op">=</tt> <tt class="py-number">0.003</tt> <tt class="py-op">*</tt> <tt class="py-number">1.e9</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"> </tt>
+<a name="main_sequence_life_K97"></a><div id="main_sequence_life_K97-def"><a name="L138"></a><tt class="py-lineno">138</tt> <a class="py-toggle" href="#" id="main_sequence_life_K97-toggle" onclick="return toggle('main_sequence_life_K97');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#main_sequence_life_K97">main_sequence_life_K97</a><tt class="py-op">(</tt><tt class="py-param">mass</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main_sequence_life_K97-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main_sequence_life_K97-expanded"><a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-docstring">"""Lifetime in years from Kodama (1997) via Romano et al. (2005). </tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">    The minlife attribute gives the minimum lifetime for a star as M-&gt;inf.</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">    Parameters</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">    ----------</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">    mass: array</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">        Stellar mass in solar masses.</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">    Notes</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">    -----</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-docstring">    50 for m &lt;= 0.56 MSun</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">    10^((0.334 - sqrt(1.790 - 0.2232*(7.764 - logm)))/0.1116) for m &lt;= 6.6 MSun</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">    1.2 m^-1.85 + 0.003 for m &gt; 6.6 MSun</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-name">mass</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">atleast_1d</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">empty</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">.</tt><tt class="py-name">shape</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-name">mass</tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">0.56</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">50.</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-name">imask</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">logical_and</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0.56</tt><tt class="py-op">,</tt> <tt class="py-name">mass</tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">6.6</tt><tt class="py-op">)</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-name">imask</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-number">10.</tt><tt class="py-op">**</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">0.334</tt> <tt class="py-op">-</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">sqrt</tt><tt class="py-op">(</tt><tt class="py-number">1.790</tt> <tt class="py-op">-</tt>  </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">                                  <tt class="py-number">0.2232</tt><tt class="py-op">*</tt><tt class="py-op">(</tt><tt class="py-number">7.764</tt> <tt class="py-op">-</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">log10</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">[</tt><tt class="py-name">imask</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">               <tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">0.1116</tt><tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-name">mass</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">6.6</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">1.2</tt> <tt class="py-op">*</tt> <tt class="py-name">mass</tt><tt class="py-op">[</tt><tt class="py-name">mass</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">6.6</tt><tt class="py-op">]</tt><tt class="py-op">**</tt><tt class="py-op">-</tt><tt class="py-number">1.85</tt> <tt class="py-op">+</tt> <tt class="py-number">0.003</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt class="py-comment"># Make sure the max lifetime is preserved.</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-name">t</tt><tt class="py-op">&gt;</tt><tt class="py-number">50.</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-number">50.</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-number">1.e9</tt> <tt class="py-op">*</tt> <tt class="py-name">t</tt> </tt>
+</div><a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Function enrichpy.lifetime.main_sequence_life_K97()=enrichpy.lifetime-module.html#main_sequence_life_K97"><a title="enrichpy.lifetime.main_sequence_life_K97" class="py-name" href="#" onclick="return doclink('link-2', 'main_sequence_life_K97', 'link-2');">main_sequence_life_K97</a></tt><tt class="py-op">.</tt><tt class="py-name">minlife</tt> <tt class="py-op">=</tt> <tt class="py-number">0.003</tt> <tt class="py-op">*</tt> <tt class="py-number">1.e9</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt id="link-3" class="py-name"><a title="enrichpy.lifetime.main_sequence_life_K97" class="py-name" href="#" onclick="return doclink('link-3', 'main_sequence_life_K97', 'link-2');">main_sequence_life_K97</a></tt><tt class="py-op">.</tt><tt class="py-name">maxlife</tt> <tt class="py-op">=</tt> <tt class="py-number">50.</tt> <tt class="py-op">*</tt> <tt class="py-number">1e9</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"> </tt>
+<a name="test_conversion"></a><div id="test_conversion-def"><a name="L174"></a><tt class="py-lineno">174</tt> <a class="py-toggle" href="#" id="test_conversion-toggle" onclick="return toggle('test_conversion');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="enrichpy.lifetime-module.html#test_conversion">test_conversion</a><tt class="py-op">(</tt><tt class="py-param">lifetime_function</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test_conversion-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="test_conversion-expanded"><a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">    <tt class="py-docstring">"""Tests conversion of mass into lifetime and back. Note that this</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">    test is not passed right now because of the numerical</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">    discontinuties in the lifetime functions where their different</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">    segments meet up."""</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-name">lifetime_function</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">testing</tt><tt class="py-op">.</tt><tt class="py-name">utils</tt> <tt class="py-keyword">as</tt> <tt class="py-name">ntest</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-name">mass</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">arange</tt><tt class="py-op">(</tt><tt class="py-number">0.</tt><tt class="py-op">,</tt> <tt class="py-number">200.</tt><tt class="py-op">,</tt> <tt class="py-number">0.1</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">    <tt class="py-name">time_from_mass</tt> <tt class="py-op">=</tt> <tt class="py-name">lifetime_function</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">    <tt class="py-name">mass_from_time_func</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">                       <tt id="link-4" class="py-name" targets="Function enrichpy.lifetime.mass_from_main_sequence_life_function()=enrichpy.lifetime-module.html#mass_from_main_sequence_life_function"><a title="enrichpy.lifetime.mass_from_main_sequence_life_function" class="py-name" href="#" onclick="return doclink('link-4', 'mass_from_main_sequence_life_function', 'link-4');">mass_from_main_sequence_life_function</a></tt><tt class="py-op">(</tt><tt class="py-name">lifetime_function</tt><tt class="py-op">)</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">    <tt class="py-name">mass_from_time_from_mass</tt> <tt class="py-op">=</tt> <tt class="py-name">mass_from_time_func</tt><tt class="py-op">(</tt><tt class="py-name">time_from_mass</tt><tt class="py-op">)</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-name">frac_diff</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">mass_from_time_from_mass</tt><tt class="py-op">-</tt><tt class="py-name">mass</tt><tt class="py-op">)</tt><tt class="py-op">/</tt><tt class="py-name">mass</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">subplot</tt><tt class="py-op">(</tt><tt class="py-number">221</tt><tt class="py-op">)</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">,</tt> <tt class="py-name">mass_from_time_from_mass</tt><tt class="py-op">)</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">subplot</tt><tt class="py-op">(</tt><tt class="py-number">222</tt><tt class="py-op">)</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">,</tt> <tt class="py-name">time_from_mass</tt><tt class="py-op">,</tt> <tt class="py-name">label</tt><tt class="py-op">=</tt><tt class="py-name">lifetime_function</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">yscale</tt><tt class="py-op">(</tt><tt class="py-string">'log'</tt><tt class="py-op">)</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">legend</tt><tt class="py-op">(</tt><tt class="py-name">loc</tt><tt class="py-op">=</tt><tt class="py-string">'best'</tt><tt class="py-op">)</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">subplot</tt><tt class="py-op">(</tt><tt class="py-number">223</tt><tt class="py-op">)</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-name">mass</tt><tt class="py-op">,</tt> <tt class="py-name">frac_diff</tt><tt class="py-op">)</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">    <tt class="py-name">goodmask</tt> <tt class="py-op">=</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">ones</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">time_from_mass</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">dtype</tt><tt class="py-op">=</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">bool</tt><tt class="py-op">)</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">lifetime_function</tt><tt class="py-op">,</tt> <tt class="py-string">'minlife'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">        <tt class="py-name">goodmask</tt><tt class="py-op">[</tt><tt class="py-name">time_from_mass</tt> <tt class="py-op">&lt;=</tt> <tt class="py-name">lifetime_function</tt><tt class="py-op">.</tt><tt class="py-name">minlife</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">lifetime_function</tt><tt class="py-op">,</tt> <tt class="py-string">'maxlife'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-name">goodmask</tt><tt class="py-op">[</tt><tt class="py-name">time_from_mass</tt> <tt class="py-op">&gt;=</tt> <tt class="py-name">lifetime_function</tt><tt class="py-op">.</tt><tt class="py-name">maxlife</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">    <tt class="py-name">goodmask</tt><tt class="py-op">[</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">logical_not</tt><tt class="py-op">(</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">isfinite</tt><tt class="py-op">(</tt><tt class="py-name">time_from_mass</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-string">"Max frac. diff: "</tt><tt class="py-op">,</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">nanmax</tt><tt class="py-op">(</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">frac_diff</tt><tt class="py-op">[</tt><tt class="py-name">goodmask</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-string">"SKIPPING TEST THAT FAILS!!!!"</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-name">threshold</tt> <tt class="py-op">=</tt> <tt class="py-number">1e-9</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">        <tt class="py-name">ntest</tt><tt class="py-op">.</tt><tt class="py-name">assert_array_less</tt><tt class="py-op">(</tt><tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">abs</tt><tt class="py-op">(</tt><tt class="py-name">frac_diff</tt><tt class="py-op">[</tt><tt class="py-name">goodmask</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">                                <tt class="py-name">threshold</tt> <tt class="py-op">*</tt> <tt class="py-name">numpy</tt><tt class="py-op">.</tt><tt class="py-name">ones</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">frac_diff</tt><tt class="py-op">[</tt><tt class="py-name">goodmask</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">                                <tt class="py-name">err_msg</tt><tt class="py-op">=</tt><tt class="py-string">'Error in mass recovery exceeds %s'</tt> <tt class="py-op">%</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">                                <tt class="py-name">threshold</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">'Mass recovery discrepency is below %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">threshold</tt> </tt>
+</div><a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line"> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line"> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">     </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">    <tt class="py-comment">### Argument parsing. ###</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt><tt class="py-op">==</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Run with a filename argument to produce image files, e.g.:"</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">" python lifetime.py lifetime.png"</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">        <tt id="link-5" class="py-name" targets="Variable enrichpy.yields.Data_ChLi.filename=enrichpy.yields.Data_ChLi-class.html#filename,Variable enrichpy.yields.Data_GBM.filename=enrichpy.yields.Data_GBM-class.html#filename,Variable enrichpy.yields.Data_H.filename=enrichpy.yields.Data_H-class.html#filename,Variable enrichpy.yields.Data_vdHG.filename=enrichpy.yields.Data_vdHG-class.html#filename"><a title="enrichpy.yields.Data_ChLi.filename
+enrichpy.yields.Data_GBM.filename
+enrichpy.yields.Data_H.filename
+enrichpy.yields.Data_vdHG.filename" class="py-name" href="#" onclick="return doclink('link-5', 'filename', 'link-5');">filename</a></tt> <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">        <tt class="py-name">prefix</tt><tt class="py-op">,</tt> <tt class="py-name">extension</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">splitext</tt><tt class="py-op">(</tt><tt id="link-6" class="py-name"><a title="enrichpy.yields.Data_ChLi.filename
+enrichpy.yields.Data_GBM.filename
+enrichpy.yields.Data_H.filename
+enrichpy.yields.Data_vdHG.filename" class="py-name" href="#" onclick="return doclink('link-6', 'filename', 'link-5');">filename</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">        <tt id="link-7" class="py-name"><a title="enrichpy.yields.Data_ChLi.filename
+enrichpy.yields.Data_GBM.filename
+enrichpy.yields.Data_H.filename
+enrichpy.yields.Data_vdHG.filename" class="py-name" href="#" onclick="return doclink('link-7', 'filename', 'link-5');">filename</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">         </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">    <tt class="py-comment"># Get a list of all the main_sequence_life_* functions.</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">    <tt class="py-name">module</tt> <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">modules</tt><tt class="py-op">[</tt><tt class="py-name">__name__</tt><tt class="py-op">]</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">    <tt class="py-name">functionlist</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">module</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">dir</tt><tt class="py-op">(</tt><tt class="py-name">module</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-name">name</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'main_sequence_life_'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line"> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">pylab</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-comment">#import scipy</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">    <tt class="py-comment">#import scipy.integrate</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">    <tt class="py-comment"># Plot the functions by mass.</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">function</tt> <tt class="py-keyword">in</tt> <tt class="py-name">functionlist</tt><tt class="py-op">:</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">        <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">figure</tt><tt class="py-op">(</tt><tt class="py-name">figsize</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-number">11</tt><tt class="py-op">,</tt><tt class="py-number">6</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">        <tt id="link-8" class="py-name" targets="Function enrichpy.lifetime.test_conversion()=enrichpy.lifetime-module.html#test_conversion"><a title="enrichpy.lifetime.test_conversion" class="py-name" href="#" onclick="return doclink('link-8', 'test_conversion', 'link-8');">test_conversion</a></tt><tt class="py-op">(</tt><tt class="py-name">function</tt><tt class="py-op">)</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">    <tt class="py-comment">### Plot output code. ###</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-9" class="py-name"><a title="enrichpy.yields.Data_ChLi.filename
+enrichpy.yields.Data_GBM.filename
+enrichpy.yields.Data_H.filename
+enrichpy.yields.Data_vdHG.filename" class="py-name" href="#" onclick="return doclink('link-9', 'filename', 'link-5');">filename</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">        <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">show</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">        <tt class="py-keyword">from</tt> <tt class="py-name">matplotlib</tt> <tt class="py-keyword">import</tt> <tt class="py-name">_pylab_helpers</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">manager</tt> <tt class="py-keyword">in</tt> <tt class="py-name">_pylab_helpers</tt><tt class="py-op">.</tt><tt class="py-name">Gcf</tt><tt class="py-op">.</tt><tt class="py-name">get_all_fig_managers</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">            <tt class="py-name">fig</tt> <tt class="py-op">=</tt> <tt class="py-name">manager</tt><tt class="py-op">.</tt><tt class="py-name">canvas</tt><tt class="py-op">.</tt><tt class="py-name">figure</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">fig</tt><tt class="py-op">.</tt><tt class="py-name">get_label</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">                <tt class="py-name">label</tt> <tt class="py-op">=</tt> <tt class="py-name">fig</tt><tt class="py-op">.</tt><tt class="py-name">get_label</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">                <tt class="py-name">label</tt> <tt class="py-op">=</tt> <tt class="py-string">'_Fig'</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">manager</tt><tt class="py-op">.</tt><tt class="py-name">num</tt><tt class="py-op">)</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">            <tt class="py-name">newfilename</tt> <tt class="py-op">=</tt> <tt class="py-name">prefix</tt> <tt class="py-op">+</tt> <tt class="py-string">'_'</tt> <tt class="py-op">+</tt> <tt class="py-name">label</tt> <tt class="py-op">+</tt> <tt class="py-name">extension</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">            <tt class="py-name">fig</tt><tt class="py-op">.</tt><tt class="py-name">savefig</tt><tt class="py-op">(</tt><tt class="py-name">newfilename</tt><tt class="py-op">,</tt> <tt class="py-name">bbox_inches</tt><tt class="py-op">=</tt><tt class="py-string">"tight"</tt><tt class="py-op">)</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="enrichpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jul 27 15:00:50 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
