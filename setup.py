@@ -5,7 +5,7 @@ import nose
 
 setup(
     name = "EnrichPy",
-    version = "0.1",
+    version = "0.1.001",
     packages = find_packages(),
     package_data = {
         # If any package contains these files, include them
