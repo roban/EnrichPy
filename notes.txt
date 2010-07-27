@@ -16,3 +16,12 @@ initialmassfunction.py runs and makes graphs.
 Converted yields to using pkg_resources so that it can access
 installed data files in a system- and installation-independent way.
 
+2010-07-27
+
+Tested enrichment module by using in scripts to reproduce graphs for
+article:
+
+http://arxiv.org/abs/1007.3581
+
+
+

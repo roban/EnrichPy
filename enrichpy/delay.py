@@ -1,3 +1,6 @@
+"""Class Delay represents the delay distribution for metals emerging from stars.
+
+"""
 import math
 import sys
 import cPickle

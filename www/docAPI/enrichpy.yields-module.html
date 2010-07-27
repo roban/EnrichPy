@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>enrichpy.yields</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="enrichpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="enrichpy-module.html">Package&nbsp;enrichpy</a> ::
+        Module&nbsp;yields
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module yields</h1><p class="nomargin-top"><span class="codelink"><a href="enrichpy.yields-pysrc.html">source&nbsp;code</a></span></p>
+<p>Encapsulates stellar chemical yield data, currently only carbon 12.</p>
+<p>General scheme:</p>
+<p>For each data source, a Yield_Data subclass handles reading in the
+data and converting it into numpy array of yields, stellar masses, and
+stellar metallicites.</p>
+<p>The Interpolate_Yields class take a Yield_Data subclass instance and
+handles the creation of an interpolation function that returns the
+yield as a function of stellar mass and metallicity.</p>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Classes</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="enrichpy.yields.Yield_Data-class.html" class="summary-name">Yield_Data</a><br />
+      Base class for yield data.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="enrichpy.yields.Data_vdHG-class.html" class="summary-name">Data_vdHG</a><br />
+      van den Hoek and Groenewegen (1997): 0.8 -- 8 Msun; Z = 0.001 -- 0.04
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="enrichpy.yields.Data_H-class.html" class="summary-name">Data_H</a><br />
+      Herwig 2004: 2-6 Msun; Z=0.0001
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="enrichpy.yields.Data_GBM-class.html" class="summary-name">Data_GBM</a><br />
+      Gavilan, Buell, &amp; Molla (2005): 0.8 -- 100 Msun; log(Z/Zsun)=-0.2--+0.2
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="enrichpy.yields.Exponentiate-class.html" class="summary-name">Exponentiate</a><br />
+      Decorator to exponentiate some arguments before calling the function.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="enrichpy.yields.Interpolate_Yields-class.html" class="summary-name">Interpolate_Yields</a><br />
+      The ejected carbon mass is interpolated on a logarithmic
+metalicity scale and mass scale.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="enrichpy.yields.Data_ChLi-class.html" class="summary-name">Data_ChLi</a><br />
+      Chieffi &amp; Limongi (2004) yields: 13--35 Msun; Z = 0, 1e-6 -- 0.02
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="enrichpy.yields.Data_CaLa-class.html" class="summary-name">Data_CaLa</a><br />
+      Campbell &amp; Lattanzio 2008 0.85 -- 3 Msun; Z = 0, &amp; [Fe/H] = -6.5 -- -3.0
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Functions</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.yields-module.html#ejection_from_yield" class="summary-sig-name">ejection_from_yield</a>(<span class="summary-sig-arg">mYield</span>,
+        <span class="summary-sig-arg">mIni</span>,
+        <span class="summary-sig-arg">mRem</span>,
+        <span class="summary-sig-arg">xIni</span>)</span><br />
+      Convert net yield of an element to total ejected mass.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#ejection_from_yield">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.yields-module.html#yield_from_ejection" class="summary-sig-name">yield_from_ejection</a>(<span class="summary-sig-arg">mEj</span>,
+        <span class="summary-sig-arg">mIni</span>,
+        <span class="summary-sig-arg">mRem</span>,
+        <span class="summary-sig-arg">xIni</span>)</span><br />
+      Convert total ejected mass to net yield of an element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#yield_from_ejection">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="linear_coefficients"></a><span class="summary-sig-name">linear_coefficients</span>(<span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#linear_coefficients">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="print_linear_info"></a><span class="summary-sig-name">print_linear_info</span>(<span class="summary-sig-arg">slope</span>,
+        <span class="summary-sig-arg">intercept</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#print_linear_info">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="enrichpy.yields-module.html#extrapolate_function" class="summary-sig-name">extrapolate_function</a>(<span class="summary-sig-arg">yield_function</span>,
+        <span class="summary-sig-arg">metallicity</span>,
+        <span class="summary-sig-arg">return_coeffs</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Linearly extrapolate yield data to high and low masses.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#extrapolate_function">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_plot_data_interp"></a><span class="summary-sig-name">test_plot_data_interp</span>(<span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">nm</span>=<span class="summary-sig-default">1000.0</span>,
+        <span class="summary-sig-arg">nZ</span>=<span class="summary-sig-default">1000.0</span>,
+        <span class="summary-sig-arg">**args</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#test_plot_data_interp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="data_overlap"></a><span class="summary-sig-name">data_overlap</span>(<span class="summary-sig-arg">data_list</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#data_overlap">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_plot_interp"></a><span class="summary-sig-name">test_plot_interp</span>(<span class="summary-sig-arg">data_list</span>,
+        <span class="summary-sig-arg">Z_list</span>,
+        <span class="summary-sig-arg">nm</span>=<span class="summary-sig-default">1000.0</span>,
+        <span class="summary-sig-arg">maxmass</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">ejections</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">title</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">logx</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">logy</span>=<span class="summary-sig-default">True</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#test_plot_interp">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="test_all"></a><span class="summary-sig-name">test_all</span>()</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="enrichpy.yields-pysrc.html#test_all">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'enrichpy'"><code class="variable-quote">'</code><code class="variable-string">enrichpy</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Function Details</span></td>
+</tr>
+</table>
+<a name="ejection_from_yield"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ejection_from_yield</span>(<span class="sig-arg">mYield</span>,
+        <span class="sig-arg">mIni</span>,
+        <span class="sig-arg">mRem</span>,
+        <span class="sig-arg">xIni</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.yields-pysrc.html#ejection_from_yield">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convert net yield of an element to total ejected mass.</p>
+<p>mYield, mIni, and mRem should be in the same units (which will also
+be the units of the returned ejected mass.</p>
+<p>xIni is the initial mass fraction of the element.</p>
+<p>See GBM equation 11.</p>
+<p>Gavilan M., Buell J.F., Molla M. Astron. Astrophys. 2005, 432, 861
+(2005A&amp;A...432..861G)</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="yield_from_ejection"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">yield_from_ejection</span>(<span class="sig-arg">mEj</span>,
+        <span class="sig-arg">mIni</span>,
+        <span class="sig-arg">mRem</span>,
+        <span class="sig-arg">xIni</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.yields-pysrc.html#yield_from_ejection">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Convert total ejected mass to net yield of an element.</p>
+<p>mEj, mIni, and mRem should be in the same units (which will also
+be the units of the returned yield.</p>
+<p>xIni is the initial mass fraction of the element.</p>
+<p>See GBM equation 11.</p>
+<p>Gavilan M., Buell J.F., Molla M. Astron. Astrophys. 2005, 432, 861
+(2005A&amp;A...432..861G)</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="extrapolate_function"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">extrapolate_function</span>(<span class="sig-arg">yield_function</span>,
+        <span class="sig-arg">metallicity</span>,
+        <span class="sig-arg">return_coeffs</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="enrichpy.yields-pysrc.html#extrapolate_function">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Linearly extrapolate yield data to high and low masses.</p>
+<p>Returns two functions: the high mass extrapolation and the low
+mass extrapolation.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="enrichpy-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jul 27 15:00:49 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

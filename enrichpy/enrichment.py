@@ -1,3 +1,5 @@
+"""Classes and routines to calculate enrichment and ionization histories.
+"""
 import copy
 
 import numpy

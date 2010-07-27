@@ -10,9 +10,6 @@ clean out old extraneous code.
 yields.py
 ---------
 
-Use resource management for data files:
- http://peak.telecommunity.com/DevCenter/PythonEggs#accessing-package-resources
-
 Check yield data.
 
 lifetime.py
@@ -21,7 +18,3 @@ lifetime.py
 fix discontinuities in inversion of lifetime functions somehow? see
 test_conversion.
 
-enrichment.py
--------------
-
-test with scripts.

@@ -13,7 +13,7 @@ import scipy
 import scipy.integrate
 
 import cosmolopy.utils as utils
-from utils import Normalize
+from cosmolopy.utils import Normalize
 
 ##################### Utilities #####################################
 

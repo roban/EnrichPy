@@ -102,6 +102,8 @@ def main_sequence_life_MM89(mass):
     From Maeder & Meynet (1989), via Romano, Chiappini, Matteucci,
     Tosi, 2005, A\&A, 430, 491 (2005A&A...430..491R), who say:
 
+    ::
+    
       t = 
         10^(-0.6545 logm + 1) for m <= 1.3 MSun
         10^(-3.7 logm + 1.35) for 1.3 < m/MSun <= 3
@@ -110,7 +112,7 @@ def main_sequence_life_MM89(mass):
         10^(-0.86 logm - 0.94) for 15 < m/MSun <= 60
         1.2 m^-1.85  +  0.003 for m > 60 MSun
       with t in units of Gyr.
-      
+
     """
 
     import numpy
