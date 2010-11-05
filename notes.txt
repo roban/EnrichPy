@@ -23,5 +23,14 @@ article:
 
 http://arxiv.org/abs/1007.3581
 
+2010-11-05
+
+With help from P.J. Eby, solved the problem with the yield data not
+installing, as described in this thread:
+http://mail.python.org/pipermail/distutils-sig/2010-November/017038.html
+
+I simply had to rename the files to avoid the string '..' in the file
+names. Also created MANIFEST.in to make sdist happy.
+
 
 

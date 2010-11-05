@@ -159,7 +159,7 @@ class Data_vdHG(Yield_Data):
     """
 
     shortname = 'vdH&G1997'
-    filename = 'yield_data/1997A&AS..123..305V_tab2-22_total.dat'
+    filename = 'yield_data/1997A&AS__123__305V_tab2-22_total.dat'
     metal_col=0
     mass_col=1
     yield_col=4
@@ -202,7 +202,7 @@ class Data_H(Yield_Data):
     """
 
     shortname = 'H2004'
-    filename = 'yield_data/2004ApJS..155..651H_table5.dat'
+    filename = 'yield_data/2004ApJS__155__651H_table5.dat'
     def _H_iso_converter(*args):
         """Strip element names from isotope in ChLi table."""
         isotope = args[-1]
@@ -238,7 +238,7 @@ class Data_GBM(Yield_Data):
     """
 
     shortname = 'GB&M2005'
-    filename = 'yield_data/2005A&A...432..861G/table2.dat'
+    filename = 'yield_data/2005A&A__432__861G/table2.dat'
     metal_col=0
     mass_col=1
     rem_col=2
@@ -470,7 +470,7 @@ class Data_ChLi(Yield_Data):
 
     """
     shortname = 'Ch&Li2004'
-    filename = 'yield_data/2004ApJ...608..405C_yields.dat'
+    filename = 'yield_data/2004ApJ__608__405C_yields.dat'
     def _ChLi_iso_converter(*args):
         """Strip element names from isotope in ChLi table."""
         isotope = args[-1]
@@ -674,7 +674,7 @@ class Data_CaLa(Yield_Data):
 
     """
     shortname = 'Ca&La2008'
-    basefilename = 'yield_data/2008A&A...490..769C_table'
+    basefilename = 'yield_data/2008A&A__490__769C_table'
 
     def __init__(self, interp_args={}):
         self.interp_args={'swapxy':True}
